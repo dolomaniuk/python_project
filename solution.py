@@ -7,3 +7,5 @@ c2 = int(input())
 
 if a1 <= b1:
     a1, b1 = b1, a1
+if b1 <= c1:
+    b1, c1 = c1, b1
