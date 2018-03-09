@@ -18,7 +18,6 @@ def sorting(a, b, c):       # сортируем в порядке убыван�
             a, b = b, a
         if b < c:
             b, c = c, b
-    # print(a, b, c)
     return a, b, c
 
 
