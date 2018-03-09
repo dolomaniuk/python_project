@@ -30,7 +30,7 @@ if isEven(x1, y1) and isEven(x2, y2):
         else:
             if (varX + 1) <= 8:  # что бы не выйти за края
                 varX += 1
-        # print(varX, varY)
+        print(varX, varY)
 else:
     varX = -x2
 
