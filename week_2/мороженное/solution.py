@@ -1,6 +1,8 @@
 k = int(input())
 
-if (k % 3 == 0) or (k % 5 == 0) and k > 0:
+if (k % 3 == 0) or (k % 5 == 0):
+    print('YES')
+elif (k % 5) % 3 == 0:
     print('YES')
 else:
     print('NO')
