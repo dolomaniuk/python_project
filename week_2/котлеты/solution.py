@@ -2,11 +2,7 @@ k = int(input())    # кол-во одновременно возможных
 m = int(input())    # время обжарки котлеты с 1 стороны
 n = int(input())    # кол-во котлет
 time = 0
-if n > k:
-    while n > 0:
-        time += k * (2 * m)
-        n -= k
-elif n <= k:
-    time = k * (2 * m)
-
+if ((2 * n) % k) != 0:
+    print((2 * n) // k)
+    time = (2 * n // k + 1) * m
 print(time)
