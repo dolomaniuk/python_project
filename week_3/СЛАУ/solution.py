@@ -1,10 +1,10 @@
 # решение методом Крамера
-a = int(input())
-b = int(input())
-c = int(input())
-d = int(input())
-e = int(input())
-f = int(input())
+a = float(input())
+b = float(input())
+c = float(input())
+d = float(input())
+e = float(input())
+f = float(input())
 
 delta = a * d - b * c
 delX1 = e * d - b * f
