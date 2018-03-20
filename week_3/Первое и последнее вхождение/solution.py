@@ -6,8 +6,8 @@ if pos != -1:
     first = pos
     pos = string.find('f', pos + 1)
     if pos != -1:
-        string = string[-1: -len(string) - 1: -1]
-        pos = len(string) - string.find('f') - 1
-        print(first, pos)
+        # string = string[-1: -len(string) - 1: -1]
+        # pos = len(string) - string.find('f') - 1
+        print(first, string.rfind('f'))
     else:
         print(first)
