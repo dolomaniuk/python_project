@@ -3,14 +3,14 @@ import string
 import random
 
 # Создаем экземпляр класса-провайдера с данными для исландского языка.
-print('Input number of language:', '1: ru', '2: eng', sep='\n')
+print('Who do you want to create:', '1: ru', '2: eng', sep='\n')
 nation = int(input())
 while not(0 < nation < 3):
     print('Input only 1 or 2 number')
     nation = int(input())
 
 
-def create_human(n):
+def create_human(n):    # function of creating new client
     passport = ''
 
     if n == 1:
@@ -44,3 +44,11 @@ def create_human(n):
 
 
 create_human(nation)
+
+keys = str(input('Press "Space" and next "Enter" to repeat\nor "Enter" to exit\n'))
+try:
+    while keys[0] == ' ':
+        create_human(nation)
+        keys = input('Press "Space" and next "Enter" to create new client again\nor "Enter" to exit\n')
+except:
+    pass
