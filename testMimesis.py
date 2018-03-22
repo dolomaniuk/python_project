@@ -1,4 +1,6 @@
 from mimesis import Person
+import string
+import random
 
 # Создаем экземпляр класса-провайдера с данными для исландского языка.
 print('Input number of language:', '1: ru', '2: eng', sep='\n')
@@ -8,7 +10,9 @@ while not(0 < nation < 3):
     nation = int(input())
 
 
-def createHuman(n):
+def create_human(n):
+    passport = ''
+
     if n == 1:
         person = Person('ru')
     else:
@@ -19,6 +23,13 @@ def createHuman(n):
     print('\nфамилия:\t', person.last_name())
     print('имя:\t\t', person.name())
     print('отчество:\t', person.surname(), '\n')
+
+    for _ in range(2):
+        varLet = random.choice(string.ascii_uppercase)
+        passport += varLet
+    passport += person.telephone('#######')
+    print('паспорт:\t', passport)
+
     print('пол:\t\t', person.gender())
     print('возраст:\t', person.age(13, 70), '\n')
     # print('аватар\t', person.avatar())
@@ -32,4 +43,4 @@ def createHuman(n):
     print('вера:\t\t', person.worldview(), '\n')
 
 
-createHuman(nation)
+create_human(nation)
