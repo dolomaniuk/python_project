@@ -8,21 +8,32 @@ with requests.get(page_link, timeout=5) as page_response:
     page_content = BeautifulSoup(page_response.content, "html.parser")
 
 # years = page_content.find(class_='data-second-item data-year 1')
+def desc_avto():
+    avto_box = page_content.find('div', class_='product-full clearfix js-product ')
+    title_box = avto_box.find('div', class_='title')
+    title = title_box.text.strip()
+    print('title:', title)
+    description_box = avto_box.find('div', class_='description')
+    description = description_box.text.strip()
+    print('description:', description)
+    # print('title:', title)
+    years_box = avto_box.find('div', class_='data-second-item data-year 1')
+    year = years_box.span.string
+    print('year:', year)
+    mileage_box = avto_box.find(class_='mileage')
+    mileage = mileage_box.text.strip()
+    print('mileage:', mileage)
+    location_box = avto_box.find(class_='location')
+    location = location_box.text.strip()
+    print('location:', location)
+    prices_box = avto_box.find(class_='data-price-usd')
+    price = prices_box.text.strip()
+    print('price:', price)
+    link_box = avto_box.a['href']
+    print(link_box)
+    print('\n')
 
-mileage_box = page_content.find(class_='mileage')
-mileage = mileage_box.text.strip()
-print('mileage:', mileage)
-years_box = page_content.find(class_='data-second-item data-year 1')
-year = years_box.span.text.strip()
-print('year:', year)
-prices_box = page_content.find(class_='data-price-usd')
-price = prices_box.text.strip()
-print('price:', price)
-
-
-# prices has a form:
-#[<div class="main_price">Price: $66.68</div>,
-# <div class="main_price">Price: $56.68</div>]
+desc_avto()
 
 # you can also access the main_price class by specifying the tag of the class
 # prices = page_content.find_all('div', attrs={'class':'data-price-usd'})
