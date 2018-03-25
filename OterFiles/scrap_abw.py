@@ -1,10 +1,54 @@
 from bs4 import BeautifulSoup
 import requests
 import csv
-import os
-avtomobil = []
-page_link ='https://www.abw.by/car/sell/ford/c-max/?search=1&type=1&sort=&capacity1=&capacity2=&mileage1=&mileage2=&year1=2003&year2=&price1=&price2=7000&country=1&text=&day=30&photo=1'
+import configparser
 
+# TODO - если объявок больше чем 1 страница
+
+
+avtomobil = []
+page_link = 'https://www.abw.by/car/sell/'
+
+config = configparser.ConfigParser()
+config.read('avto_to_search.ini')
+
+avto_brand = config.get('AVTO', 'brand')
+avto_model = config.get('AVTO', 'model')
+avto_year_from = config.get('AVTO', 'year_from')
+avto_year_to = config.get('AVTO', 'year_to')
+avto_price_from = config.get('AVTO', 'price_from')
+avto_price_to = config.get('AVTO', 'price_to')
+avto_country = config.get('AVTO', 'country')
+avto_days = config.get('AVTO', 'days')
+avto_photo = config.get('AVTO', 'photo')
+
+# config.add_section('AVTO')
+# config.set('AVTO', 'avto_brand', 'ford')
+# config.set('AVTO', 'avto_model', 'c-max')
+# config.set('AVTO', 'avto_year_from', '2001')
+# config.set('AVTO', 'avto_year_to', '')
+# config.set('AVTO', 'avto_price_from', '')
+# config.set('AVTO', 'avto_price_to', '7000')
+# config.set('AVTO', 'avto_country', '1')
+# config.set('AVTO', 'avto_days', '30')
+# config.set('AVTO', 'avto_photo', '1')
+
+# # save to a file
+# with open('avto.ini', 'w') as configfile:
+#     config.write(configfile)
+
+page_link += avto_brand + '/'
+page_link += avto_model + '/'
+page_link += '?search=1&type=1&sort=&capacity1=&capacity2=&mileage1=&mileage2=&year1='
+page_link += avto_year_from + '&'
+page_link += 'year2=' + avto_year_to + '&'
+page_link += 'price1=' + avto_price_from + '&'
+page_link += 'price2=' + avto_price_to + '&'
+page_link += 'country=' + avto_country + '&'    # Беларусь
+page_link += 'text=&day=' + avto_days + '&' # за какой период показывать объявки
+page_link += 'photo=' + avto_photo  # показывать только с фото
+
+print(page_link)
 
 def desc_avto(new_avto_block, x):
     title_box = new_avto_block.find('div', class_='title')
