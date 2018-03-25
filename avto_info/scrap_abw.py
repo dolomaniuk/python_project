@@ -95,9 +95,3 @@ try:
     print('\nНайдено всего {} объявлений, поданных за последний месяц'.format(len(avto_box)))
 except:
     print("File abw.csv can't be cleaned")
-
-
-# you can also access the main_price class by specifying the tag of the class
-# prices = page_content.find_all('div', attrs={'class':'data-price-usd'})
-
-# open a csv file with append, so old data will not be erased
