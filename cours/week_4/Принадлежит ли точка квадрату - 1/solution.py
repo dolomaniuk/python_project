@@ -2,14 +2,11 @@ x = float(input())
 y = float(input())
 
 
-def isInGap(a):
-    if -1 <= a <= 1:
-        return 'YES'
-    return 'NO'
-
-
 def IsPointInSquare(x, y):
-    print(isInGap(x) and isInGap(y))
+    return -1 <= x <= 1 and -1 <= y <= 1
 
 
-IsPointInSquare(x, y)
+if IsPointInSquare(x, y):
+    print('YES')
+else:
+    print('NO')
