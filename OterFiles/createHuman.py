@@ -3,16 +3,15 @@ import string
 import random
 
 # Создаем экземпляр класса-провайдера с данными для исландского языка.
-print('Who do you want to create:', '1: ru', '2: eng', sep='\n')
-nation = int(input())
-while not(0 < nation < 3):
-    print('Input only 1 or 2 number')
-    nation = int(input())
-
+# print('Who do you want to create:', '1: ru', '2: eng', sep='\n')
+# nation = int(input())
+# while not(0 < nation < 3):
+#     print('Input only 1 or 2 number')
+#     nation = int(input())
+nation = 1
 
 def create_human(n):    # function of creating new client
     passport = ''
-
     if n == 1:
         person = Person('ru')
     else:
