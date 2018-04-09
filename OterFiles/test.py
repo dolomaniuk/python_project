@@ -1,12 +1,9 @@
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
+import autoit
 
-driver = webdriver.Firefox()
-driver.get("http://www.python.org")
-assert "Python" in driver.title
-elem = driver.find_element_by_name("q")
-elem.clear()
-elem.send_keys("pycon")
-elem.send_keys(Keys.RETURN)
-assert "No results found." not in driver.page_source
-driver.close()
+# autoit.run("notepad.exe")
+# autoit.win_activate_by_handle(0x0002062E)
+print(autoit.control_get_handle(0x0002062E, 'Сумма'))
+# print(autoit.control_get_pos_by_handle(132654))
+# autoit.control_send("cashDepositTaskForm:s2_e:s2", "13.1")
+# autoit.win_close("[CLASS:Notepad]")
+# autoit.control_click("[Class:#32770]", "Button2")
