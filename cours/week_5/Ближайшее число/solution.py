@@ -1,14 +1,13 @@
 N = int(input())
 myList = list(map(int, input().split()))
 x = int(input())
+newList = []
 
-# if myList.count(x) > 0:
-#     print(x)
-# else:
-minDelta = abs(abs(x) - myList[0])
-for i in range(1, N):
-    delta = abs(abs(x) - myList[i])
-    if delta < minDelta:
-        minDelta = delta
-        closerNumber = myList[i]
-print(closerNumber)
+if myList.count(x) > 0:
+    print(x)
+else:
+    for i in range(N):
+        newList.append(abs(abs(x) - myList[i]))
+    ind = newList.index(min(newList))
+    print(myList[ind])
+    # print('ind:', newList.index(min(newList)), 'val:', min(newList))
