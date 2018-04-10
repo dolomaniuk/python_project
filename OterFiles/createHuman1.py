@@ -3,6 +3,7 @@ import string
 import random
 import pyautogui
 import xerox    # for ctrl+c/ctrl+v
+from transliterate import translit, get_available_language_codes
 from datetime import date
 
 # pyautogui.PAUSE = 0.25
@@ -59,10 +60,12 @@ def selfData(dict):
         pyautogui.press('pagedown')    # set female
         pyautogui.press('pagedown')
 
+    xerox.copy(translit(dict['name'], 'ru', reversed=True))
     pyautogui.press('tab')
-    pyautogui.typewrite('ILYA')     # type latin Name
+    pyautogui.hotkey('ctrl', 'v')     # type latin Name
+    xerox.copy(translit(dict['lastname'], 'ru', reversed=True))
     pyautogui.press('tab')
-    pyautogui.typewrite('PUPKIN')     # type latin LastName
+    pyautogui.hotkey('ctrl', 'v')     # type latin LastName
     
 
 def create_personalData():    # function of creating new client
