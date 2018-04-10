@@ -2,7 +2,9 @@ from mimesis import Person
 import string
 import random
 import pyautogui
+import xerox    # for ctrl+c/ctrl+v
 from datetime import date
+
 # pyautogui.PAUSE = 0.25
 personalData = {'lastname': 'петров',
                 'name': 'вася',
@@ -32,13 +34,20 @@ def currentDate():
 
 
 # def selfData(name, lname, surname, gend, latname, latlname)
-def selfData():
+def selfData(dict):
+    xerox.copy(dict['lastname'])
     pyautogui.doubleClick(341, 246) # set cursor on Familiya
-    pyautogui.typewrite('lastname')   # type LastName
+    pyautogui.hotkey('ctrl', 'v')
+
+    xerox.copy(dict['name'])
     pyautogui.press('tab')
-    pyautogui.typewrite('name')     # type Name
+    pyautogui.hotkey('ctrl', 'v')     # type Name
+
+    xerox.copy(dict['surname'])
     pyautogui.press('tab')
-    pyautogui.typewrite('ЕГОРОВИЧ')     # type surname
+    pyautogui.hotkey('ctrl', 'v')     # type surname
+
+
     pyautogui.press('tab')
     pyautogui.press('tab')
     pyautogui.press('pageup')      # set default value
@@ -49,7 +58,7 @@ def selfData():
     else:
         pyautogui.press('pagedown')    # set female
         pyautogui.press('pagedown')
-    
+
     pyautogui.press('tab')
     pyautogui.typewrite('ILYA')     # type latin Name
     pyautogui.press('tab')
@@ -112,7 +121,7 @@ def create_personalData():    # function of creating new client
 
 
 create_personalData()
-selfData()
+selfData(personalData)
 # keys = str(input('Press "Space" and next "Enter" to repeat\nor "Enter" to exit\n').split())
 # try:
 #     while keys[0] == ' ':
