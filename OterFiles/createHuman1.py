@@ -37,7 +37,7 @@ def currentDate():
 # def selfData(name, lname, surname, gend, latname, latlname)
 def selfData(dict):
     xerox.copy(dict['lastname'])
-    pyautogui.doubleClick(341, 246) # set cursor on Familiya
+    pyautogui.doubleClick(400, 307) # set cursor on Familiya
     pyautogui.hotkey('ctrl', 'v')
 
     xerox.copy(dict['name'])
@@ -48,17 +48,11 @@ def selfData(dict):
     pyautogui.press('tab')
     pyautogui.hotkey('ctrl', 'v')     # type surname
 
-
     pyautogui.press('tab')
-    pyautogui.press('tab')
-    pyautogui.press('pageup')      # set default value
-    pyautogui.press('pageup')
-
     if personalData['gender'] == 'Муж.':
-        pyautogui.press('pagedown')    # set male
+        pyautogui.press('left')    # set male
     else:
-        pyautogui.press('pagedown')    # set female
-        pyautogui.press('pagedown')
+        pyautogui.press('right')    # set female
 
     xerox.copy(translit(dict['name'], 'ru', reversed=True))
     pyautogui.press('tab')
@@ -66,14 +60,117 @@ def selfData(dict):
     xerox.copy(translit(dict['lastname'], 'ru', reversed=True))
     pyautogui.press('tab')
     pyautogui.hotkey('ctrl', 'v')     # type latin LastName
-    
+
+    pyautogui.click(318, 505)  # set cursor on Резиденство
+    pyautogui.hotkey('home')
+    pyautogui.press('down')
+    pyautogui.press('enter')
+
+    pyautogui.press('tab')      # set date of birthday
+    for i in range(3):
+        pyautogui.typewrite(personalData['age'][i])
+
+################################## DUL #####################
+
+    pyautogui.click(190, 890)  # click on deactivate
+
+    print('Wait...15 sec')
+    pyautogui._autoPause(15, 1)
+
+    pyautogui.click(380, 690)  # click on type of dockument
+    pyautogui.press('down')
+    pyautogui.press('enter')
+
+    pyautogui.press('tab')
+    xerox.copy(dict['passport'])
+    pyautogui.press('tab')
+    pyautogui.hotkey('ctrl', 'v')     # type passport
+
+    xerox.copy('МОСКОВСКИЙ РОВД Г.БРЕСТА')
+    pyautogui.press('tab')
+    pyautogui.hotkey('ctrl', 'v')  # type who took
+
+    pyautogui.press('tab')
+    pyautogui.typewrite('05032001')     # type date out of document
+    pyautogui.press('tab')
+    pyautogui.typewrite('06032025')     # type who took
+
+################################## BirthPlace #####################
+
+    pyautogui.press('tab')
+    pyautogui.hotkey('home')
+    pyautogui.press('down')
+    pyautogui.press('enter')
+
+    for i in range(3):
+        pyautogui.press('tab')
+
+    xerox.copy('БРЕСТ')         # type City
+    pyautogui.press('tab')
+    pyautogui.hotkey('ctrl', 'v')  # type City
+
+################################## REGISTRATION #####################
+
+    pyautogui.press('tab')          # country
+    # pyautogui.hotkey('home')
+    # pyautogui.press('down')
+    # pyautogui.press('enter')
+    #
+    # print('Wait...5 sec')
+    # pyautogui._autoPause(5, 1)
+
+    pyautogui.press('tab')
+    pyautogui.typewrite('224002')   # type index
+
+    xerox.copy('БРЕСТСКАЯ')         # type область
+    pyautogui.press('tab')
+    pyautogui.hotkey('ctrl', 'v')
+
+    xerox.copy('ЮЖНЫЙ')         # type район
+    pyautogui.press('tab')
+    pyautogui.hotkey('ctrl', 'v')
+
+    pyautogui.press('tab')
+
+    xerox.copy('БРЕСТ')             # type City
+    pyautogui.press('tab')
+    pyautogui.hotkey('ctrl', 'v')   # type City
+
+    pyautogui.press('tab')
+
+    xerox.copy('МОСКОВСКАЯ')        # type street
+    pyautogui.press('tab')
+    pyautogui.hotkey('ctrl', 'v')   # type street
+
+    pyautogui.press('tab')
+    pyautogui.typewrite('13')       # building
+    pyautogui.press('tab')
+    pyautogui.typewrite('4')        # корпус
+    pyautogui.press('tab')
+    pyautogui.typewrite('6')        # house
+
+################################## LIVING PLACE #####################
+
+    pyautogui.press('tab')
+    # pyautogui.press('space')        # аналочно месту регистрации
+
+################################## CONTACT #####################
+
+    pyautogui.press('tab')
+    for i in range(5):
+        pyautogui.typewrite(personalData['mobile'])       # mobile phone
+        pyautogui.press('tab')
+    xerox.copy(personalData['email'])        # type street
+    # pyautogui.press('tab')
+    pyautogui.hotkey('ctrl', 'v')   # type street
+
 
 def create_personalData():    # function of creating new client
     passport = ''
     person = Person('ru')
 
     # Выводим исландские мужские имена.
-    
+
     lastname = person.last_name()
     personalData['lastname'] = lastname
     print('\nфамилия:\t', personalData['lastname'])
