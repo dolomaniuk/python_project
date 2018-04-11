@@ -33,6 +33,7 @@ def currentDate():
     return age
 
 
+# def copyPaste(value)
 
 # def selfData(name, lname, surname, gend, latname, latlname)
 def selfData(dict):
@@ -152,7 +153,9 @@ def selfData(dict):
 ################################## LIVING PLACE #####################
 
     pyautogui.press('tab')
-    # pyautogui.press('space')        # аналочно месту регистрации
+    pyautogui.press('space')        # аналочно месту регистрации
+    print('Wait...2 sec')
+    pyautogui._autoPause(1, 1)
 
 ################################## CONTACT #####################
 
