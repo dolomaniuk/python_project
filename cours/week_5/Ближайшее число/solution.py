@@ -6,14 +6,8 @@ newList = []
 if myList.count(x) > 0:
     print(x)
 else:
-    if x > 0:
-        for i in range(N):
-            newList.append(abs(x - myList[i]))
-            # print('1', abs(x - myList[i]))
-    else:
-        for i in range(N):
-            newList.append(x - myList[i])
-            # print('2', x - myList[i])
-    # print(newList)
+    for i in range(N):
+        newList.append(abs(abs(x) - myList[i]))
     ind = newList.index(min(newList))
     print(myList[ind])
+    # print('ind:', newList.index(min(newList)), 'val:', min(newList))
