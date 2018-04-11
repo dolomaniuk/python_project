@@ -68,9 +68,9 @@ def selfData(dict):
 
 ################################## DUL #####################
 
+    print('Wait pls:', end=' ')
     pyautogui.click(190, 890)           # click on deactivate button
 
-    print('Wait pls:', end=' ')
     for i in range(15, 0, -1):
         print(i, end=' ')
         pyautogui._autoPause(1, 1)
