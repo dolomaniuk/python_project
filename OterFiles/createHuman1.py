@@ -6,7 +6,7 @@ import xerox    # for ctrl+c/ctrl+v
 from transliterate import translit, get_available_language_codes
 from datetime import date
 
-# pyautogui.PAUSE = 0.25
+pyautogui.PAUSE = 0.1
 personalData = {'lastname': 'петров',
                 'name': 'вася',
                 'surname': 'евгеньевич',
@@ -32,64 +32,58 @@ def currentDate():
     age.append(str(year))
     return age
 
+# function of copy data in clipboard with next paste
+def copyPaste(value):
+    xerox.copy(value)
+    pyautogui.press('tab')
+    pyautogui.hotkey('ctrl', 'v')
+    print(value)
 
-# def copyPaste(value)
-
-# def selfData(name, lname, surname, gend, latname, latlname)
+# function of inserting data in field on web-page
 def selfData(dict):
     xerox.copy(dict['lastname'])
-    pyautogui.doubleClick(400, 307) # set cursor on Familiya
+    pyautogui.doubleClick(400, 307)     # set cursor on Familiya
     pyautogui.hotkey('ctrl', 'v')
 
-    xerox.copy(dict['name'])
-    pyautogui.press('tab')
-    pyautogui.hotkey('ctrl', 'v')     # type Name
-
-    xerox.copy(dict['surname'])
-    pyautogui.press('tab')
-    pyautogui.hotkey('ctrl', 'v')     # type surname
+    copyPaste(dict['name'])             # type Name
+    copyPaste(dict['surname'])          # type surname
 
     pyautogui.press('tab')
     if personalData['gender'] == 'Муж.':
-        pyautogui.press('left')    # set male
+        pyautogui.press('left')         # set male
     else:
-        pyautogui.press('right')    # set female
+        pyautogui.press('right')        # set female
 
-    xerox.copy(translit(dict['name'], 'ru', reversed=True))
-    pyautogui.press('tab')
-    pyautogui.hotkey('ctrl', 'v')     # type latin Name
-    xerox.copy(translit(dict['lastname'], 'ru', reversed=True))
-    pyautogui.press('tab')
-    pyautogui.hotkey('ctrl', 'v')     # type latin LastName
+    copyPaste(translit(dict['name'], 'ru', reversed=True))      # type latin Name
+    copyPaste(translit(dict['lastname'], 'ru', reversed=True))  # type latin LastName
 
-    pyautogui.click(318, 505)  # set cursor on Резиденство
+    pyautogui.click(318, 505)           # set cursor on Резиденство
     pyautogui.hotkey('home')
     pyautogui.press('down')
     pyautogui.press('enter')
 
-    pyautogui.press('tab')      # set date of birthday
+    pyautogui.press('tab')              # set date of birthday
     for i in range(3):
         pyautogui.typewrite(personalData['age'][i])
 
 ################################## DUL #####################
 
-    pyautogui.click(190, 890)  # click on deactivate
+    pyautogui.click(190, 890)           # click on deactivate button
 
-    print('Wait...15 sec')
-    pyautogui._autoPause(15, 1)
+    print('Wait pls:', end=' ')
+    for i in range(15, 0, -1):
+        print(i, end=' ')
+        pyautogui._autoPause(1, 1)
+    print('')
 
-    pyautogui.click(380, 690)  # click on type of dockument
+    pyautogui.click(380, 690)           # click on type of dockument
     pyautogui.press('down')
     pyautogui.press('enter')
 
     pyautogui.press('tab')
-    xerox.copy(dict['passport'])
-    pyautogui.press('tab')
-    pyautogui.hotkey('ctrl', 'v')     # type passport
 
-    xerox.copy('МОСКОВСКИЙ РОВД Г.БРЕСТА')
-    pyautogui.press('tab')
-    pyautogui.hotkey('ctrl', 'v')  # type who took
+    copyPaste(dict['passport'])         # type passport
+    copyPaste('МОСКОВСКИЙ РОВД Г.БРЕСТА')   # type who took
 
     pyautogui.press('tab')
     pyautogui.typewrite('05032001')     # type date out of document
@@ -106,13 +100,11 @@ def selfData(dict):
     for i in range(3):
         pyautogui.press('tab')
 
-    xerox.copy('БРЕСТ')         # type City
-    pyautogui.press('tab')
-    pyautogui.hotkey('ctrl', 'v')  # type City
+    copyPaste('БРЕСТ')                  # type City
 
 ################################## REGISTRATION #####################
 
-    pyautogui.press('tab')          # country
+    pyautogui.press('tab')              # country
     # pyautogui.hotkey('home')
     # pyautogui.press('down')
     # pyautogui.press('enter')
@@ -121,40 +113,30 @@ def selfData(dict):
     # pyautogui._autoPause(5, 1)
 
     pyautogui.press('tab')
-    pyautogui.typewrite('224002')   # type index
+    pyautogui.typewrite('224002')       # type index
 
-    xerox.copy('БРЕСТСКАЯ')         # type область
-    pyautogui.press('tab')
-    pyautogui.hotkey('ctrl', 'v')
-
-    xerox.copy('ЮЖНЫЙ')         # type район
-    pyautogui.press('tab')
-    pyautogui.hotkey('ctrl', 'v')
+    copyPaste('БРЕСТСКАЯ')              # type область
+    copyPaste('ЮЖНЫЙ')                  # type район
 
     pyautogui.press('tab')
 
-    xerox.copy('БРЕСТ')             # type City
-    pyautogui.press('tab')
-    pyautogui.hotkey('ctrl', 'v')   # type City
+    copyPaste('БРЕСТ')                  # type City
 
     pyautogui.press('tab')
 
-    xerox.copy('МОСКОВСКАЯ')        # type street
-    pyautogui.press('tab')
-    pyautogui.hotkey('ctrl', 'v')   # type street
+    copyPaste('МОСКОВСКАЯ')             # type street
 
     pyautogui.press('tab')
-    pyautogui.typewrite('13')       # building
+    pyautogui.typewrite('13')           # building
     pyautogui.press('tab')
-    pyautogui.typewrite('4')        # корпус
+    pyautogui.typewrite('4')            # корпус
     pyautogui.press('tab')
-    pyautogui.typewrite('6')        # house
+    pyautogui.typewrite('6')            # house
 
 ################################## LIVING PLACE #####################
 
     pyautogui.press('tab')
-    pyautogui.press('space')        # аналочно месту регистрации
-    print('Wait...2 sec')
+    pyautogui.press('space')            # аналочно месту регистрации
     pyautogui._autoPause(1, 1)
 
 ################################## CONTACT #####################
@@ -163,12 +145,11 @@ def selfData(dict):
     for i in range(5):
         pyautogui.typewrite(personalData['mobile'])       # mobile phone
         pyautogui.press('tab')
-    xerox.copy(personalData['email'])        # type street
-    # pyautogui.press('tab')
-    pyautogui.hotkey('ctrl', 'v')   # type street
+
+    copyPaste(personalData['email'])    # type street
 
 
-def create_personalData():    # function of creating new client
+def create_personalData():    # function of generate new client data
     passport = ''
     person = Person('ru')
 
@@ -176,41 +157,41 @@ def create_personalData():    # function of creating new client
 
     lastname = person.last_name()
     personalData['lastname'] = lastname
-    print('\nфамилия:\t', personalData['lastname'])
+    # print('\nфамилия:\t', personalData['lastname'])
 
     name = person.name()
     personalData['name'] = name
-    print('имя:\t\t', personalData['name'])
+    # print('имя:\t\t', personalData['name'])
 
     surname = person.surname()
     personalData['surname'] = surname
-    print('отчество:\t', personalData['surname'])
+    # print('отчество:\t', personalData['surname'])
 
     gender = person.gender()
     personalData['gender'] = gender
-    print('пол:\t\t', personalData['gender'])
+    # print('пол:\t\t', personalData['gender'])
 
     for _ in range(2):
         varLet = random.choice(string.ascii_uppercase)
         passport += varLet
     passport += person.telephone('#######')
     personalData['passport'] = passport
-    print('паспорт:\t', personalData['passport'])
+    # print('паспорт:\t', personalData['passport'])
 
 ### birthday
     currentDate()
     personalData['age'] = age
     personalData['age'][2] = str(int(personalData['age'][2]) - person.age(16, 70))
-    print('возраст:\t', personalData['age'], '\n')
+    # print('возраст:\t', personalData['age'], '\n')
 ###
 
-    print('гражд-во:\t', person.get_current_locale())
-    print('Нац-сть:\t',person.nationality())
+    # print('гражд-во:\t', person.get_current_locale())
+    # print('Нац-сть:\t',person.nationality())
 
 ### mobile
     mobile = person.telephone('+37529#######')
     personalData['mobile'] = mobile
-    print('телефон:\t', personalData['mobile'])
+    # print('телефон:\t', personalData['mobile'])
 ###
 ### email
     # personalData['email'] = person.email()
