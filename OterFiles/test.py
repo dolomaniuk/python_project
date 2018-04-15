@@ -1,22 +1,16 @@
-class Vehicle:
-    def __init__(self, number_of_wheels, type_of_tank, seating_capacity, maximum_velocity):
-        self.number_of_wheels = number_of_wheels
-        self.type_of_tank = type_of_tank
-        self.seating_capacity = seating_capacity
-        self.maximum_velocity = maximum_velocity
+class Person:
+    def __init__(self, first_name, age):
+        self.first_name = first_name
+        self._age = age
 
-    @property
-    def number_of_wheels(self):
-        return self.number_of_wheels
+    def show_age(self):
+        return self._get_age()
 
-    @number_of_wheels.setter
-    def number_of_wheels(self, number):
-        self.number_of_wheels = number
+    def _get_age(self):
+        return self._age
 
-    def make_noise(self):
-        print('VRUUUUMMMM!!!!')
+dud = Person('Timmy', 25)
+dud.first_name = 'Sebastian'
+print(dud.show_age())
 
 
-ford = Vehicle(4, 'diesel', 6, 240)
-ford.make_noise()
-print(ford.number_of_wheels())
