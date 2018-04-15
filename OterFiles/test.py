@@ -1,16 +1,14 @@
-class Person:
-    def __init__(self, first_name, age):
-        self.first_name = first_name
-        self._age = age
+class Car:
+    def __init__(self, number_of_wheels, seating_capacity, maximum_velocity):
+        self.number_of_wheels = number_of_wheels
+        self.seating_capacity = seating_capacity
+        self.maximum_velocity = maximum_velocity
 
-    def show_age(self):
-        return self._get_age()
+class ElecticCar(Car):
+    def __init__(self, number_of_wheels, seating_capacity, maximum_velocity):
+        Car.__init__(self, number_of_wheels, seating_capacity, maximum_velocity)
 
-    def _get_age(self):
-        return self._age
-
-dud = Person('Timmy', 25)
-dud.first_name = 'Sebastian'
-print(dud.show_age())
-
-
+elFord = ElecticCar(4, 6, 260)
+print(elFord.number_of_wheels)
+print(elFord.seating_capacity)
+print(elFord.maximum_velocity)
