@@ -3,18 +3,27 @@ listB = list(map(int, input().split()))
 listC = []
 lenListC = len(listA) + len(listB)
 
+lenghtA = len(listA)
+lenghtB = len(listB)
+
 
 def merge(A, B):
+    Ai = 0  # counter
+    Bi = 0  # counter
     while len(listC) < lenListC:
-        if (len(A) > 0) and (len(B) > 0):
-            if A[0] < B[0]:
-                listC.append(A.pop(0))
+        if (Ai < lenghtA) and (Bi < lenghtB):
+            if A[Ai] < B[Bi]:
+                listC.append(A[Ai])
+                Ai += 1
             else:
-                listC.append(B.pop(0))
-        elif len(A) > 0:
-            listC.append(A.pop(0))
-        elif len(B) > 0:
-            listC.append(B.pop(0))
+                listC.append(B[Bi])
+                Bi += 1
+        elif Ai <= lenghtA:
+            listC.append(A[Ai])
+            Ai += 1
+        elif Bi <= lenghtB:
+            listC.append(B[Bi])
+            Bi += 1
 
     return listC
 
