@@ -1,22 +1,24 @@
-listA = list(map(int, input().split()))
-listB = list(map(int, input().split()))
-listC = []
-lenListC = len(listA) + len(listB)
+A = list(map(int, input().split()))
+B = list(map(int, input().split()))
+newlist = []
 
 
-def merge(A, B):
-    for i in range(lenListC):
-        if (len(A) > 0) and (len(B) > 0):
-            if A[0] < B[0]:
-                listC.append(A.pop(0))
-            else:
-                listC.append(B.pop(0))
-        elif len(A) > 0:
-            listC.append(A.pop(0))
-        elif len(B) > 0:
-            listC.append(B.pop(0))
+def merge(list1, list2):
+    while list1 and list2:
+        if list1[0] == list2[0]:
+            newlist.append(list1.pop(0))
+            newlist.append(list2.pop(0))
+        elif list1[0] < list2[0]:
+            newlist.append(list1.pop(0))
+        else:
+            newlist.append(list2.pop(0))
 
-    return listC
+    if list1:
+        newlist.extend(list1)
+    if list2:
+        newlist.extend(list2)
+
+    return newlist
 
 
-print(*merge(listA, listB))
+print(*merge(A, B))
