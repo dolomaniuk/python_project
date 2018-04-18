@@ -1,6 +1,5 @@
 S = list(map(int, input().split()))
 arr_spaces = []
-summa = 0
 
 for i in range(S[1]):
     arr_spaces.append(int(input()))
