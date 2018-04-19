@@ -1,14 +1,17 @@
-class Car:
-    def __init__(self, number_of_wheels, seating_capacity, maximum_velocity):
-        self.number_of_wheels = number_of_wheels
-        self.seating_capacity = seating_capacity
-        self.maximum_velocity = maximum_velocity
+from collections import namedtuple
 
-class ElecticCar(Car):
-    def __init__(self, number_of_wheels, seating_capacity, maximum_velocity):
-        Car.__init__(self, number_of_wheels, seating_capacity, maximum_velocity)
+p = []
+n = int(input())
+for i in range(n):
+    man = namedtuple('man', 'height name')
+    man.height, man.name = input().split()
+    p.append(man)
 
-elFord = ElecticCar(4, 6, 260)
-print(elFord.number_of_wheels)
-print(elFord.seating_capacity)
-print(elFord.maximum_velocity)
+
+def makeTuple(man):
+    return (man.height, man.name)
+
+
+p.sort(key=makeTuple)
+for now in p:
+    print(now.height, now.name)
