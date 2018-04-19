@@ -30,7 +30,11 @@ arrBombShel.sort(key=lambda bombshelter: (bombshelter.distance ** 2, bombshelter
 for now in arrBombShel:
     print(now.distance, now.number)
 
+res = []
 for i in arrShel:
     for j in arrBombShel:
-        result.append(tuple(abs(arrShel[i].distance - arrBombShel[j].distance), arrBombShel[j].number))
+        res = namedtuple('Result', 'distance number')
+        res.distance = abs(int(arrShel[i].distance) - int(arrBombShel[j].distance))
+        res.number = arrBombShel[j].number
+        result.append(tuple(res.distance, res.number))
         print(*result)
