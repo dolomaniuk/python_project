@@ -1,6 +1,7 @@
 myList = list(map(int, input().split()))
-newList = []
-for i in range(len(myList)):
-    newList.append((myList[i], i))
-newList.sort()
-print(newList)
+grades = [0] * 11
+for now in myList:
+    grades[now] += 1
+for grade in range(len(grades)):
+    for i in range(grades[grade]):
+        print(grade, end=' ')
