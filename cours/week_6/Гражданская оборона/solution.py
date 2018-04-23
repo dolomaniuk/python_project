@@ -10,46 +10,45 @@ with open('inpData.txt', 'r', encoding='utf8') as fin:
     for line in data:
         tmpList.append(line.strip())
 
-print(tmpList)
+# print(tmpList)
 n = int(tmpList[0])
-distN = list(map(int, tmpList[1:n + 1]))
-m = int(tmpList[n + 1])
-distM = list(map(int, tmpList[n + 2:]))
+distN = list(map(int, tmpList[1].split()))
+m = int(tmpList[2])
+distM = list(map(int, tmpList[3].split()))
 
-print(n, distN)
-print(m, distM)
-print()
+# print(n, distN)
+# print(m, distM)
+# print()
 
 # number of shelter
 # n = int(input())
 # distance each of shelter in n
 # distN = list(map(int, input().split()))
 newListOfDistN = []
-for i in range(len(distN)):
+for i in range(n):
     newListOfDistN.append((distN[i], i))
 # newListOfDistN.sort()
-print(newListOfDistN)
+# print(newListOfDistN)
 # number of bombshelter
 # m = int(input())
 # distance each of bombshelter in m
 # distM = list(map(int, input().split()))
 newListOfDistM = []
-for i in range(len(distM)):
+for i in range(m):
     newListOfDistM.append((distM[i], i))
 # newListOfDistM.sort()
-print(newListOfDistM)
+# print(newListOfDistM)
 newMinList = []
-print('tmpMin', abs(newListOfDistM[0][0] - newListOfDistN[0][0]))
-tmpMin = abs(newListOfDistM[0][0] - newListOfDistN[0][0])
 
 for i in range(len(newListOfDistN)):
+    tmpMin = abs(newListOfDistM[0][0] - newListOfDistN[i][0])
     for j in range(len(newListOfDistM)):
         tmp = abs(newListOfDistM[j][0] - newListOfDistN[i][0])
-        print('dist', tmp, end=' ')
+        # print('dist', tmp, end=' ')
         if tmp <= tmpMin:
             tmpMin = tmp
             index = newListOfDistM[j][1]
-            print('index', newListOfDistM[j][1])
+            # print('index', newListOfDistM[j][1] + 1)
     newMinList.append(newListOfDistM[index][1] + 1)
-    print('_______')
+    # print('\n_______\n')
 print(*newMinList)
