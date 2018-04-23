@@ -1,17 +1,13 @@
-from collections import namedtuple
+with open('inpData.txt', 'r', encoding='utf8') as fin:
+    data = fin.readlines()
+    tmpList = []
+    for i in data:
+        tmpList.append(i.strip())
+print(tmpList)
+n = int(tmpList[0])
+distN = list(map(int, tmpList[1].split()))
+m = int(tmpList[2])
+distM = list(map(int, tmpList[3].split()))
 
-p = []
-n = int(input())
-for i in range(n):
-    man = namedtuple('man', 'height name')
-    man.height, man.name = input().split()
-    p.append(man)
-
-
-def makeTuple(man):
-    return (man.height, man.name)
-
-
-p.sort(key=makeTuple)
-for now in p:
-    print(now.height, now.name)
+print(n, distN)
+print(m, distM)
