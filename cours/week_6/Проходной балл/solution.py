@@ -16,13 +16,11 @@ with open('input.txt', 'r', encoding='utf8') as fileIn:
         Pass = True
 
 listOfScore.sort(reverse=True)
-print(listOfScore)
-tmpScore = listOfScore[0]
-
+# print(listOfScore)
 
 countMax = listOfScore.count(listOfScore[k - 1])
-lastIndexK = listOfScore.index(listOfScore[k - 1], k)
-print('countMax=', countMax, 'ind', lastIndexK)
+lastIndexK = listOfScore.index(listOfScore[k - 1])
+# print('countMax=', countMax, 'ind', lastIndexK)
 
 if countMax >= k:
     print(1)
