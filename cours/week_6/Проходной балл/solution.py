@@ -1,51 +1,41 @@
-class Students:
-    FIO = ''
-    score = 0
-    passExam = True
-
-listOfStudentes = []
-passScore = 0
-countPass = 0
-countFail = 0
-passStudentesList = []
-scoringEqualing = True
+Pass = True
+listOfScore = []
 
 with open('input.txt', 'r', encoding='utf8') as fileIn:
     k = int(fileIn.readline())
 
     for line in fileIn.readlines():
-        student = Students()
         data = line.split()
-        student.FIO = ' '.join(data[0:-3])
         egeScores = list(map(int, data[-3:]))
-        student.score = sum(egeScores)
         for i in egeScores:
             if i < 40:
-                student.passExam = False
+                Pass = False
+        if Pass:
+            score = sum(egeScores)
+            listOfScore.append(score)
+        Pass = True
 
-        if not student.passExam:
-            countFail += 1
-        else:
-            countPass += 1
-            passStudentesList.append(student)
+listOfScore.sort(reverse=True)
+print(listOfScore)
+tmpScore = listOfScore[0]
 
-        listOfStudentes.append(student)
 
-listOfStudentes.sort(key=lambda p: p.score, reverse=True)
-passScore = listOfStudentes[k - 1].score
-# print('k=', k, 'passScore=', passScore)
-# print('countFail', countFail, 'countPass', countPass)
+countMax = listOfScore.count(listOfScore[k - 1])
+lastIndexK = listOfScore.index(listOfScore[k - 1], k)
+print('countMax=', countMax, 'ind', lastIndexK)
 
-if countPass <= k:
+if countMax >= k:
+    print(1)
+elif 0 < len(listOfScore) < k:
     print(0)
-elif countPass > k:
-    scoring = passStudentesList[0].score
-    for std in passStudentesList:
-        if std.score != scoring:
-            scoringEqualing = False
-    if scoringEqualing:
-        print(1)
-    else:
-        print(passScore)
+elif len(listOfScore) == 0:
+    print("")
 else:
+    # pass scoring bal
+    for scr in range(lastIndexK, -1, -1):
+        if listOfScore[scr] == listOfScore[lastIndexK]:
+            continue
+        else:
+            passScore = listOfScore[scr]
+            break
     print(passScore)
