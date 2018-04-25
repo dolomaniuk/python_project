@@ -7,8 +7,8 @@ def CountSort(A):
         newList[num] += 1
     # print(newList)
     for i in range(100):
-        if newList[i] > 0:
-            print((str(i) + ' ') * newList[i], end='')
+        # if newList[i] > 0:
+        print((str(i) + ' ') * newList[i], end='')
 
 
 CountSort(myList)
