@@ -21,19 +21,23 @@ scoreList.sort(reverse=True)
 
 if scoreList[-1] <= k and scoreList[-1] != 0:
     print(0)
-elif k == 0:
-    print(1)
-elif scoreList[-1] == 0:
-    print('')
-elif scoreList.count(scoreList[0]) > k:
-    print(1)
 else:
-    passScore = scoreList[k - 1]
-    if scoreList[k - 1] == scoreList[k]:
-        for scr in scoreList[k - 2::-1]:
-            if scr != passScore:
-                passScore = scr
-                break
+    if scoreList.count(scoreList[0]) > k:
+        print(1)
+    else:
+        newList = []
+        for i in range(k + 1):
+            newList.append(scoreList[i])
+        newList.sort()
+        # print(newList)
+
+        equal = 1
+        for i in range(k):
+            if newList[i] == newList[i + 1]:
+                equal += 1
             else:
-                continue
-    print(passScore)
+                break
+        if equal == 1:
+            print(min(newList))
+        else:
+            print(scoreList[k - equal])
