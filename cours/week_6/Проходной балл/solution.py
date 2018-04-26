@@ -17,27 +17,23 @@ with open('input.txt', 'r', encoding='utf8') as fileIn:
         PassExam = True
 
 scoreList.sort(reverse=True)
-# print(scoreList)
+# print(scoreList[-1])
 
-if scoreList[-1] <= k and scoreList[-1] != 0:
-    print(0)
+if scoreList.count(scoreList[0]) > k:
+    print(1)
+elif 0 < scoreList[-1] <= k:
+        print(0)
+elif scoreList[-1] == 0:
+    print('')
+elif scoreList.count(scoreList[0]) == k:
+    print('')
 else:
-    if scoreList.count(scoreList[0]) > k:
-        print(1)
-    else:
-        newList = []
-        for i in range(k + 1):
-            newList.append(scoreList[i])
-        newList.sort()
-        # print(newList)
-
-        equal = 1
-        for i in range(k):
-            if newList[i] == newList[i + 1]:
-                equal += 1
-            else:
+    passScore = scoreList[k]
+    if scoreList[k - 1] == scoreList[k]:
+        for scr in scoreList[k - 2::-1]:
+            if scr != passScore:
+                passScore = scr
                 break
-        if equal == 1:
-            print(min(newList))
-        else:
-            print(scoreList[k - equal])
+            else:
+                continue
+    print(passScore)
