@@ -19,16 +19,18 @@ with open('input.txt', 'r', encoding='utf8') as fileIn:
 scoreList.sort(reverse=True)
 # print(scoreList)
 
-if scoreList[-1] <= k:
+if scoreList[-1] <= k and scoreList[-1] != 0:
     print(0)
 elif k == 0:
-    pass
+    print(1)
+elif scoreList[-1] == 0:
+    print('')
 elif scoreList.count(scoreList[0]) > k:
     print(1)
 else:
     passScore = scoreList[k - 1]
     if scoreList[k - 1] == scoreList[k]:
-        for scr in scoreList[k - 2:0:-1]:
+        for scr in scoreList[k - 2::-1]:
             if scr != passScore:
                 passScore = scr
                 break
