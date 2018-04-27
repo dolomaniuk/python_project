@@ -51,6 +51,5 @@ for each in newListN:
     if i > 2:
         i -= 1
     # print('i=', i)
-
 for i in output:
     print(i, end=' ')
