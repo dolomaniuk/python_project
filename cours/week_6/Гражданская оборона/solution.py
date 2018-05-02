@@ -1,55 +1,38 @@
-# n = int(input())
-# listN = list(map(int, input().split()))
-# m = int(input())
-# listM = list(map(int, input().split()))
+n = int(input())
+np = list(map(int, input().split()))
+# Здесь создали 3-е поле для номера бомбоубежища
+for i in range(n):
+    np[i] = [np[i], i + 1, 0]
+np.sort()
 
-with open('inpData.txt', 'r', encoding='utf8') as fin:
-    data = fin.readlines()
-    tmpList = []
-    for line in data:
-        tmpList.append(line.strip())
+m = int(input())
+bu = list(map(int, input().split()))
+for i in range(m):
+    bu[i] = [bu[i], i + 1]
+bu.sort()
 
-n = int(tmpList[0])
-listN = tuple(map(int, tmpList[1].split()))
-m = int(tmpList[2])
-listM = tuple(map(int, tmpList[3].split()))
+# Переменная для начала вложенного цикла
+start = 0
+for i in range(n):
+    # Точка нахождения нужного бомбоубежища
+    idx = 0
+    # Чтобы минимум был точно больше любого найденного
+    minimum = 10e10
+    for j in range(start, m):
+        tmp = abs(np[i][0] - bu[j][0])
+        # Либо обновляем минимум и номер бомбоубежища
+        if tmp < minimum:
+            idx = j
+            minimum = tmp
+            np[i][2] = bu[j][1]
+        # Либо заканчиваем цикл
+        else:
+            break
+    # Переопределяем начало вложенного цикла
+    start = idx
 
-if m == 1:
-    for each in listN:
-        print(1)
-elif m > 1:
-    output = []
-    output = [0] * n
-    newListN = []
-    for i in range(n):
-        newListN.append([listN[i], i])
-    newListN.sort(key=lambda pos: pos[0])
-
-    newListM = []
-    for i in range(m):
-        newListM.append([listM[i], i])
-    newListM.sort(key=lambda pos: pos[0])
-    j = 0
-    for eachN in newListN:
-        # print('____eachN____', eachN)
-        # print(newListM)
-        distFirst = 100000
-        # print('j=', j, 'distF=', distFirst)
-        # print('srez', newListM[j:])
-        for jM in newListM[j:]:
-            # print('jM', jM)
-            distSec = abs(eachN[0] - jM[0])
-            # print('distSec', distSec)
-            if distSec < distFirst:
-                output[eachN[1]] = jM[1] + 1
-                # print('output[', eachN[1], ']=', output[eachN[1]])
-                j = newListM.index(jM)
-                # print('index:', j)
-                distFirst = distSec
-                # print('distSF=', distFirst)
-                continue
-            else:
-                break
-    print(*output)
-else:
-    pass
+np.sort(key=lambda idx: idx[1])
+# Получаем упорядоченный согласно порядка ввода список населённых пунктов и
+# назначенных им бомбоубежищ. В качестве отладки такое:
+for i in np:
+    print(i[2], end=' ')
