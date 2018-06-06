@@ -1,7 +1,19 @@
+import sys
+
 arr = []
-with open('in.txt') as fin:
-    for line in fin:
-        cc = line.split()
-        for words in cc:
-            arr.append(words)
+
+while 1:
+    try:
+        line = sys.stdin.readline()
+    except KeyboardInterrupt:
+        break
+
+    if not line:
+        break
+
+    cc = line.split()
+    for words in cc:
+        arr.append(words)
+    else:
+        break
 print(len(set(arr)))
