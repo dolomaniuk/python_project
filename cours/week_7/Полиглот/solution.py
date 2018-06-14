@@ -1,12 +1,12 @@
 def inputRightNumberN(countN):
-    if countN <= 1 and countN >= 1000:
+    if countN < 1 or countN > 1000:
         print('Error')
         return True
     return False
 
 
 def inputRightNumberM(countM):
-    if countM <= 1 and countM >= 500:
+    if countM < 1 or countM > 500:
         print('Error')
         return True
     return False
