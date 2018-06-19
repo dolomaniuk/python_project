@@ -26,10 +26,20 @@ def solve():
             M = []
             for j in range(countLanguages):
                 M.append(input())
-            set(M)
-            pupils.append(M)
+            pupils.append(set(M))
 
-    print(*pupils)
+    # языки, которые знает каждый ученик
+    commonLanguages = []
+    for each in pupils:
+        commonLanguages = each & pupils[0]
+    print(len(commonLanguages), *commonLanguages, sep='\n')
+
+    # max count languages that knows boy
+    differentLanguages = set()
+    for each in pupils:
+        differentLanguages |= each
+    print(len(differentLanguages), *differentLanguages, sep='\n')
+    # print(len(max(pupils)), *pupils[pupils.index(max(pupils))], sep='\n')
 
 
 # count of pupils (школьники)
