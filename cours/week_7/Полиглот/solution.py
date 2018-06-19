@@ -13,39 +13,37 @@ def inputRightNumberM(countM):
 
 
 def solve():
-    if inputRightNumberN(N) is True:
+    if inputRightNumberN(N):
         return
-
     else:
         for i in range(N):
             # count of each shoolboy's languages
             countLanguages = int(input())
-            if inputRightNumberM(countLanguages) is True:
+            if inputRightNumberM(countLanguages):
                 return
             # list of each shoolboy's languages
-            M = []
+            M = set()
             for j in range(countLanguages):
-                M.append(input())
-            pupils.append(set(M))
+                lang = input()
+                M.add(lang)
+                diffLanguages.add(lang)
+            pupils.append(M)
 
     # языки, которые знает каждый ученик
-    commonLanguages = []
     for each in pupils:
         commonLanguages = each & pupils[0]
     print(len(commonLanguages), *commonLanguages, sep='\n')
 
-    # max count languages that knows boy
-    differentLanguages = set()
-    for each in pupils:
-        differentLanguages |= each
-    print(len(differentLanguages), *differentLanguages, sep='\n')
-    # print(len(max(pupils)), *pupils[pupils.index(max(pupils))], sep='\n')
+    # the all difference languages
+    print(len(diffLanguages), *diffLanguages, sep='\n')
 
 
 # count of pupils (школьники)
 N = int(input())
 # list of pupils
 pupils = []
-
-
+# set of all difference languages
+diffLanguages = set()
+# set of all common languages
+commonLanguages = set()
 solve()
