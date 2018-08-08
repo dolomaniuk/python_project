@@ -1,18 +1,21 @@
-listWords = []
-countWords = []
-setWords = set()
+listWords = {}  # словарь в виде номер слова: (слово: кол-во раз встречается)
+tmp = {}
+count = 1
+result = []
 with open('input.txt') as fileIn:
     text = fileIn.readlines()
     for string in text:
-        listWords += [word for word in string.split()]
-
-countWords += [0 for i in listWords]
-print(len(listWords), listWords, sep='\n')
-for i in range(len(listWords)):
-    if listWords[i] not in setWords:
-        setWords.add(listWords[i])
+        for word in string.split():
+            listWords[count] = {word: 0}
+            count += 1
+for count in listWords.keys():
+    key = list(listWords[count].items())
+    # (key[0][0]) - сам ключ в словаре под номером count
+    if key[0][0] in tmp:
+        tmp[key[0][0]] += 1  # увеличиваем счетчик появление слова
+        listWords[count][key[0][0]] = tmp[key[0][0]]
     else:
-        countWords[i] += 1
-        # countWords.append('0')
-print(countWords)
-next(i)
+        tmp[key[0][0]] = 0    # добавляем новое слово в словарь
+    result.append(tmp[key[0][0]])
+# print(*listWords.values(), sep='\n')
+print(*result)
