@@ -1,55 +1,38 @@
-with open('inpData.txt', 'r', encoding='utf8') as fin:
-    data = fin.readlines()
-    tmpList = []
-    for line in data:
-        tmpList.append(line.strip())
-
-# n = int(input())
-# distN = list(map(int, input().split()))
-# m = int(input())
-# distM = list(map(int, input().split()))
-
-n = int(tmpList[0])
-distN = list(map(int, tmpList[1].split()))
-m = int(tmpList[2])
-distM = list(map(int, tmpList[3].split()))
-
-# print(tmpList)
-# print(n, distN)
-# print(m, distM)
-# print()
-
-# number of shelter
-
-
-
-# distance each of shelter in n
-# number of bombshelter
-# distance each of bombshelter in m
-
-newListOfDistM = []
-for i in range(m):
-    newListOfDistM.append((distM[i], i))
-sortDistM = sorted(newListOfDistM, key=lambda newListOfDistM:newListOfDistM[0])
-
-newMinList = []
-tmp = []
-
-x = []
-
+n = int(input())
+np = list(map(int, input().split()))
+# Здесь создали 3-е поле для номера бомбоубежища
 for i in range(n):
-    tmp1 = abs(sortDistM[0][0] - distN[i]), 1
-    for j in range(m):
-        tmp = abs(sortDistM[j][0] - distN[i]), j + 1
-        if tmp > tmp1:
-            print('dist1', newListOfDistM[j - 1][0])
-            tmp = tmp1
-        elif tmp == tmp1:
-            print('dist2', newListOfDistM[j - 1][0])
-            # newMinList.append(list(tmp))
+    np[i] = [np[i], i + 1, 0]
+np.sort()
+
+m = int(input())
+bu = list(map(int, input().split()))
+for i in range(m):
+    bu[i] = [bu[i], i + 1]
+bu.sort()
+
+# Переменная для начала вложенного цикла
+start = 0
+for i in range(n):
+    # Точка нахождения нужного бомбоубежища
+    idx = 0
+    # Чтобы минимум был точно больше любого найденного
+    minimum = 10e10
+    for j in range(start, m):
+        tmp = abs(np[i][0] - bu[j][0])
+        # Либо обновляем минимум и номер бомбоубежища
+        if tmp < minimum:
+            idx = j
+            minimum = tmp
+            np[i][2] = bu[j][1]
+        # Либо заканчиваем цикл
         else:
-            continue
-    newMinList.append(list(tmp))
-    x = min(newMinList, key=lambda newMinList: newMinList[0])[1]
-    print(x)
-    newMinList = []
+            break
+    # Переопределяем начало вложенного цикла
+    start = idx
+
+np.sort(key=lambda idx: idx[1])
+# Получаем упорядоченный согласно порядка ввода список населённых пунктов и
+# назначенных им бомбоубежищ. В качестве отладки такое:
+for i in np:
+    print(i[2], end=' ')
